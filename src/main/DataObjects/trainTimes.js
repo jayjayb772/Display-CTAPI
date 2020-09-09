@@ -1,4 +1,5 @@
 const moment = require('moment-timezone');
+const {debuglog} = require("../util/debugCommands");
 function buildTrainJSON(etaObj, station){
     let resp = {};
     etaObj.forEach(arrival=>{
@@ -70,6 +71,8 @@ function tConvert (time) {
     let d = time.substring(6,8);
     let clock = time. substring(9);
     time = `${y}-${m}-${d} ${clock}`
+    debuglog(`Time: ${time}`)
+    debuglog(`Time from Moment ${moment().tz("America/Chicago")}`)
     let a = millisToMinutesAndSeconds(moment(time).diff(moment().tz("America/Chicago")))
     return a;
 }
