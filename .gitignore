@@ -64,7 +64,9 @@ typings/
 
 # Output of 'npm pack'
 *.tgz
+.db
 
+.sqbpro
 # Yarn Integrity file
 .yarn-integrity
 

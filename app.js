@@ -5,11 +5,12 @@ const app = express();
 const {debuglog} = require('./src/main/util/debugCommands');
 const ENV = process.env.ENV;
 const bodyParser = require('body-parser');
-const gtfs = require('gtfs');
-const config = require('bin/configs/gtfsConfig.json');
 const sqlite3 = require('sqlite3').verbose();
 const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
+const {queryDB} = require("./src/main/services/sqLite/sqLiteService");
+const {closeConToDB} = require("./src/main/services/sqLite/sqLiteService");
+const {openConToDB} = require("./src/main/services/sqLite/sqLiteService");
 const {stationSearchByNameAndColor} = require("./src/main/services/ctaService");
 const options = {
     definition: {
@@ -25,15 +26,13 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 
-gtfs.import(config)
-    .then(() => {
-        console.log('Import Successful');
-    })
-    .catch(err => {
-        console.error(err);
-    });
 
-stationSearchByNameAndColor("Montrose", "Brown").then(r => {return});
+stationSearchByNameAndColor("Montrose", "Brown").then(r => {
+    debuglog(r)
+});
+stationSearchByNameAndColor("Diversey", "Brown").then(r => {
+    debuglog(r)
+});
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
