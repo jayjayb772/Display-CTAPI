@@ -35,7 +35,9 @@ orchestratorController.get('/', (req, res) => {
  */
 orchestratorController.get('/train-times', (req, res) => {
     debuglog("orchestratorController home")
-    if(req.query.name) {
+    if(req.query.name !=='undefined' && req.query.color !=='undefined') {
+        console.log(req.query);
+        console.log("GET OUT!")
         getTrainsByStationAndColor(req.query.name, req.query.color).then((r) => {
             res.send(r);
         }).catch(err => {
