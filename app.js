@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
 const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
+const {buildTrainJSON} = require("./src/main/DataObjects/trainTimes");
+const {getTrainsByStationAndColor} = require("./src/main/services/ctaService");
 const {queryDB} = require("./src/main/services/sqLite/sqLiteService");
 const {closeConToDB} = require("./src/main/services/sqLite/sqLiteService");
 const {openConToDB} = require("./src/main/services/sqLite/sqLiteService");
@@ -24,15 +26,6 @@ const options = {
     apis: ['./src/main/controllers/*.js'],
 };
 const swaggerSpec = swaggerJSDoc(options);
-
-
-
-stationSearchByNameAndColor("Montrose", "Brown").then(r => {
-    debuglog(r)
-});
-stationSearchByNameAndColor("Diversey", "Brown").then(r => {
-    debuglog(r)
-});
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));

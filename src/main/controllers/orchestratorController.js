@@ -1,4 +1,6 @@
 const express = require('express');
+const {getDefaultTrains} = require("../services/ctaService");
+const {getTrainsByStationAndColor} = require("../services/ctaService");
 const {debuglog} = require("../util/debugCommands");
 const orchestratorController = express.Router()
 
@@ -33,7 +35,19 @@ orchestratorController.get('/', (req, res) => {
  */
 orchestratorController.get('/train-times', (req, res) => {
     debuglog("orchestratorController home")
-    res.send("orchestratorController home");
+    if(req.query.name) {
+        getTrainsByStationAndColor(req.query.name, req.query.color).then((r) => {
+            res.send(r);
+        }).catch(err => {
+            res.send(err).status(500)
+        })
+    }else{
+        getDefaultTrains().then((r) => {
+            res.send(r);
+        }).catch(err => {
+            res.send(err).status(500)
+        })
+    }
 })
 
 

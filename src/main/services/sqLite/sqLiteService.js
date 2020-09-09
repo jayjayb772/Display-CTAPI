@@ -47,7 +47,7 @@ async function queryDB(path, table, rows, values) {
                 if (row) {
                     resolve(row);
                 } else {
-                    debuglog(`No ${row} found with the value of ${value}`);
+                    debuglog(`No ${row} found with the value of ${values}`);
                     reject("No Row")
                 }
             });

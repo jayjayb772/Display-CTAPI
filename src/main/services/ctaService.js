@@ -1,13 +1,46 @@
 const request = require('request');
 const querystring = require('querystring');
 const {queryDB} = require("./sqLite/sqLiteService");
+const {buildTrainJSON} = require("../DataObjects/trainTimes")
+const xml2js = require('xml2js');
 
-function getDefaultTrains() {
-
+async function getDefaultTrains() {
+    return new Promise(async function (resolve, reject) {
+        //get station ID
+        let times = await getTrainsByStation(process.env.MontroseID).catch(err=>{reject(err)})
+        resolve(times)
+        //getTrainsByStation
+    });
 }
 
-function getTrainsByStation(station) {
+function getTrainsByStationAndColor(stationName, stationColor){
+    return new Promise(async function (resolve, reject) {
+        //get station ID
+        stationSearchByNameAndColor(stationName, stationColor).catch(err=>{reject(err)}).then((station)=>{
+            getTrainsByStation(station).catch(err=>{reject(err)}).then((trains)=>{
+                xml2js.parseString(trains,{ mergeAttrs: true },(err, result) => {
+                    if(err) {
+                        throw err;
+                        reject(err)
+                    }
+                    resolve(buildTrainJSON(result.ctatt.eta))
+                    //return result
+                });
+            })
+        });
+    });
+}
 
+async function getTrainsByStation(station) {
+    return new Promise(async function (resolve, reject) {
+        let url = `${process.env.CTA_URL}mapid=${station}&max=5`;
+        request.get(url, (err,res)=>{
+            if(err){
+                reject(err);
+            }
+            resolve(res.body)
+        })
+    });
 }
 
 function parseTrainResponse(trainData) {
@@ -22,32 +55,17 @@ async function stationSearchByNameAndColor(name, color) {
             if(r==="No Row"){
                 reject(r);
             }
-            resolve(r);
+            resolve(r.stop_parent_id);
+        }).catch(err=>{
+            reject(err);
         })
     })
 }
 
-function getHex(color) {
-    color.toUpperCase()
-    switch (color) {
-        case "RED":
-            return '#C60C30';
-        case "GREEN":
-            return '#009B3A';
-        case "BLUE":
-            return '#00A1DE';
-        case "BROWN":
-            return '#62361B';
-        case "PURPLE":
-            return '#522398';
-        case "ORANGE":
-            return '#F9461C';
-        case "YELLOW":
-            return '#F9E300';
-        case "PINK":
-            return '#E27EA6';
-    }
-}
 
-module.exports = {getDefaultTrains, getTrainsByStation, parseTrainResponse, stationSearchByNameAndColor}
+
+
+
+
+module.exports = {getDefaultTrains, stationSearchByNameAndColor ,getTrainsByStationAndColor}
 
