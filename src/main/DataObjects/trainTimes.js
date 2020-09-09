@@ -1,5 +1,5 @@
 const moment = require('moment');
-function buildTrainJSON(etaObj){
+function buildTrainJSON(etaObj, station){
     let resp = {};
     etaObj.forEach(arrival=>{
         //etaObj.index(arrival)
@@ -10,7 +10,8 @@ function buildTrainJSON(etaObj){
             "color":color,
             "colorHex":hex,
             "arrTime":arrival.arrT[0],
-            "eta":tConvert(arrival.arrT[0])
+            "eta":tConvert(arrival.arrT[0]),
+            "where":station
         }
         resp[`Train ${etaObj.indexOf(arrival) +1}`] = train;
     })
@@ -75,8 +76,8 @@ function tConvert (time) {
 
 function millisToMinutesAndSeconds(millis) {
     let minutes = Math.floor(millis / 60000);
-    let seconds = ((millis % 60000) / 1000).toFixed(0);
-    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+
+    return minutes + " Mins";
 }
 
 

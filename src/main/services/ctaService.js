@@ -6,16 +6,22 @@ const xml2js = require('xml2js');
 
 async function getDefaultTrains() {
     return new Promise(async function (resolve, reject) {
-        //get station ID
-        let times = await getTrainsByStation(process.env.MontroseID).catch(err=>{reject(err)})
-        resolve(times)
-        //getTrainsByStation
+        await getTrainsByStation(process.env.MontroseID)
+            .catch(err=>{reject(err)})
+            .then((trains)=>{
+            xml2js.parseString(trains,{ mergeAttrs: true },(err, result) => {
+                if(err) {
+                    throw err;
+                    reject(err)
+                }
+                resolve(buildTrainJSON(result.ctatt.eta, "Montrose"))
+            });
+        })
     });
 }
 
 function getTrainsByStationAndColor(stationName, stationColor){
     return new Promise(async function (resolve, reject) {
-        //get station ID
         stationSearchByNameAndColor(stationName, stationColor).catch(err=>{reject(err)}).then((station)=>{
             getTrainsByStation(station).catch(err=>{reject(err)}).then((trains)=>{
                 xml2js.parseString(trains,{ mergeAttrs: true },(err, result) => {
@@ -23,8 +29,7 @@ function getTrainsByStationAndColor(stationName, stationColor){
                         throw err;
                         reject(err)
                     }
-                    resolve(buildTrainJSON(result.ctatt.eta))
-                    //return result
+                    resolve(buildTrainJSON(result.ctatt.eta, stationName))
                 });
             })
         });
