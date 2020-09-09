@@ -70,7 +70,7 @@ function tConvert (time) {
     let d = time.substring(6,8);
     let clock = time. substring(9);
     time = `${y}-${m}-${d} ${clock}`
-    let a = millisToMinutesAndSeconds(moment(time).diff(moment()))
+    let a = millisToMinutesAndSeconds(moment(time).diff(moment().tz("America/Chicago")))
     return a;
 }
 

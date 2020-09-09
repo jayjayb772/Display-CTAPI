@@ -27,6 +27,7 @@
     "isomorphic-form-data": "^2.0.0",
     "jest": "^26.4.2",
     "moment": "^2.27.0",
+    "moment-timezone": "^0.5.31",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.4",
