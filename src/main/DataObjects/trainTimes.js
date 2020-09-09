@@ -1,4 +1,4 @@
-const moment = require('moment');
+const moment = require('moment-timezone');
 function buildTrainJSON(etaObj, station){
     let resp = {};
     etaObj.forEach(arrival=>{
