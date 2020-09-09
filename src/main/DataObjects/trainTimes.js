@@ -73,13 +73,14 @@ function tConvert (time) {
     time = `${y}-${m}-${d} ${clock}`
     debuglog(`Time: ${time}`)
     debuglog(`Time from Moment ${moment().tz("America/Chicago")}`)
-    let a = millisToMinutesAndSeconds(moment(time).diff(moment().tz("America/Chicago")))
+    let a = millisToMinutesAndSeconds(moment(time).tz("America/Chicago").diff(moment().tz("America/Chicago")))
     return a;
 }
 
 function millisToMinutesAndSeconds(millis) {
+    debuglog(`millis ${millis}`)
     let minutes = Math.floor(millis / 60000);
-
+    debuglog(`minutes ${minutes}`)
     return minutes + " Mins";
 }
 

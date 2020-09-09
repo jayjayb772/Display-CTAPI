@@ -34,8 +34,15 @@ orchestratorController.get('/', (req, res) => {
  *         description: send a text
  */
 orchestratorController.get('/train-times', (req, res) => {
-    debuglog("orchestratorController home")
-    if(req.query.name !=='undefined' && req.query.color !=='undefined') {
+    debuglog(req.query.length)
+    if(req.query === undefined || (req.query.name === 'undefined')){
+        getDefaultTrains().then((r) => {
+            res.send(r);
+        }).catch(err => {
+            res.send(err).status(500)
+        })
+    }else{
+    //if((req.query.name !=='undefined' && req.query.color !=='undefined') || (req.query.name !==null && req.query.color!==null) || !req.query.isEmpty()) {
         console.log(req.query);
         console.log("GET OUT!")
         getTrainsByStationAndColor(req.query.name, req.query.color).then((r) => {
@@ -43,12 +50,7 @@ orchestratorController.get('/train-times', (req, res) => {
         }).catch(err => {
             res.send(err).status(500)
         })
-    }else{
-        getDefaultTrains().then((r) => {
-            res.send(r);
-        }).catch(err => {
-            res.send(err).status(500)
-        })
+
     }
 })
 
