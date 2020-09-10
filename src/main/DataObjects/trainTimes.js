@@ -71,10 +71,13 @@ function tConvert (time) {
     let d = time.substring(6,8);
     let clock = time. substring(9);
     time = `${y}-${m}-${d} ${clock}`
-    debuglog(`Time: ${time}`)
-    debuglog(`Time from Moment ${moment().tz("America/Chicago")}`)
-    let a = millisToMinutesAndSeconds(moment(time).tz("America/Chicago").diff(moment().tz("America/Chicago")))
-    return a;
+    let eta = moment(time).tz("America/Chicago")
+    let now = moment().tz("America/Chicago")
+    debuglog(`Time: ${eta}`)
+    debuglog(`Time from Moment ${now}`)
+    let curETA = eta.fromNow(true)
+    debuglog(curETA)
+    return curETA;
 }
 
 function millisToMinutesAndSeconds(millis) {
