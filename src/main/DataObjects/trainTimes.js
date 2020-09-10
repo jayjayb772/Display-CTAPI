@@ -70,7 +70,7 @@ function tConvert (time) {
     let m = time.substring(4,6);
     let d = time.substring(6,8);
     let clock = time. substring(9);
-    time = `${y}-${m}-${d} ${clock}`
+    time = `${y}-${m}-${d} ${clock}-05:00`
     let eta = moment(time)
     let now = moment().tz("America/Chicago")
     debuglog(`Time: ${eta}`)
