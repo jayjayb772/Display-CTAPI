@@ -11,7 +11,7 @@ const http = require('http');
 /**
  * Get port from environment and store in Express.
  */
-const port = normalizePort(process.env.CTA_PORT || '8081');
+const port = normalizePort(process.env.CTA_PORT || '8083');
 app.set('port', port);
 
 /**
