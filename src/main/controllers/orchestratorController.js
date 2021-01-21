@@ -24,7 +24,7 @@ orchestratorController.get('/', (req, res) => {
 /**
  * @swagger
  *
- * /orchestratorController/:
+ * /orchestratorController/train-times:
  *   get:
  *     description: gets all contact lists
  *     produces:
