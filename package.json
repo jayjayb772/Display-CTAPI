@@ -4,7 +4,7 @@
   "description": "LED MATRIX PROGRAMS",
   "main": "app.js",
   "scripts": {
-    "start": "node bin/wwwCTA.js",
+    "start": "node bin/wwwCTA",
     "test": "jest",
     "dev": "nodemon"
   },
@@ -22,19 +22,15 @@
     "enum": "^3.0.4",
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
-    "gtfs": "^2.0.2",
     "http-errors": "~1.6.3",
     "isomorphic-form-data": "^2.0.0",
-    "jest": "^26.4.2",
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.4",
     "pug": "^2.0.4",
     "request": "^2.88.2",
     "requests": "^0.3.0",
-    "sqlite3": "^5.0.0",
     "swagger-jsdoc": "^4.0.0",
     "swagger-ui-express": "^4.1.4",
     "xml2js": "^0.4.23"

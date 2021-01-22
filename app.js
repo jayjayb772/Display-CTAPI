@@ -5,15 +5,8 @@ const app = express();
 const {debuglog} = require('./src/main/util/debugCommands');
 const ENV = process.env.ENV;
 const bodyParser = require('body-parser');
-const sqlite3 = require('sqlite3').verbose();
 const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
-const {buildTrainJSON} = require("./src/main/DataObjects/trainTimes");
-const {getTrainsByStationAndColor} = require("./src/main/services/ctaService");
-const {queryDB} = require("./src/main/services/sqLite/sqLiteService");
-const {closeConToDB} = require("./src/main/services/sqLite/sqLiteService");
-const {openConToDB} = require("./src/main/services/sqLite/sqLiteService");
-const {stationSearchByNameAndColor} = require("./src/main/services/ctaService");
 const options = {
     definition: {
         openapi: '3.0.0', // Specification (optional, defaults to swagger: '2.0')

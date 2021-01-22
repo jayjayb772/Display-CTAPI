@@ -26,7 +26,7 @@ orchestratorController.get('/', (req, res) => {
  *
  * /orchestratorController/train-times:
  *   get:
- *     description: gets all contact lists
+ *     description: gets the train times at montrose
  *     produces:
  *       - application/json
  *     responses:
