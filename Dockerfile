@@ -15,4 +15,4 @@ COPY . .
 
 EXPOSE 8083
 
-CMD [ "node", "./bin/wwwCTA" ]
+CMD [ "node", "./bin/wwwCTA.js" ]

@@ -4,7 +4,7 @@
   "description": "LED MATRIX PROGRAMS",
   "main": "app.js",
   "scripts": {
-    "start": "node ./bin/wwwCTA",
+    "start": "node bin/wwwCTA.js",
     "test": "jest",
     "dev": "nodemon"
   },
