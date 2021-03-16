@@ -1,5 +1,4 @@
 const request = require('request');
-const querystring = require('querystring');
 const {queryDB} = require("./sqLite/sqLiteService");
 const {buildTrainJSON} = require("../DataObjects/trainTimes")
 const xml2js = require('xml2js');

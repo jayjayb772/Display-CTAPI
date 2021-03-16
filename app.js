@@ -39,6 +39,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
  */
 app.get('/', (req, res) =>{
     debuglog("HOME")
+    console.log("base path")
     res.send("Hello World!");
 })
 

@@ -7,7 +7,7 @@ const orchestratorController = express.Router()
 /**
  * @swagger
  *
- * /orchestratorController/:
+ * /orchestrator/:
  *   get:
  *     description: gets all contact lists
  *     produces:
@@ -24,7 +24,7 @@ orchestratorController.get('/', (req, res) => {
 /**
  * @swagger
  *
- * /orchestratorController/train-times:
+ * /orchestrator/train-times:
  *   get:
  *     description: gets the train times at montrose
  *     produces:

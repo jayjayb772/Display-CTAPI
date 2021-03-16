@@ -22,3 +22,6 @@ Because I never found a display board with enough customizability for me. Also I
 [DiscordBot](https://github.com/jayjayb772/1925-discord-bot)
 
 ---
+
+# Docker build
+docker buildx build --platform linux/arm/v7 -t docker.j-bender-portfolio.me/linuxarmv7/display-cta-api-image --push .
